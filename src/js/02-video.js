@@ -1,6 +1,6 @@
 import Vimeo from '@vimeo/player';
 import LodashTrotle from 'lodash.throttle';
-import {save, load} from "./02-videostorage"
+import {save, load} from "./storage"
 const STORAGE_KEY = 'videoplayer-current-time';
 const iframe = document.querySelector('iframe');
 const player = new Vimeo(iframe);
