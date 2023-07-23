@@ -16,11 +16,27 @@ function handleInput({ target }) {
 
 function handleSaveData(event) {
     event.preventDefault();
-
+    const {
+        elements: { email, message }
+    } = event.target;
+    if (email.value === "" || message.value === "") {
+        return window.alert("Please fill in the form")
+    } 
+    form.reset();
+    localStorage.removeItem(STORAGE_KEY);
 };
 
 function updateForm() {
-    load(STORAGE_KEY);
+    const currentState = load(STORAGE_KEY);
+    //    const onObject = Object.entries(currentState[searilizedState]);
+    //     onObject.forEach(([name, value]) => {
+    //         objData[name] = value;
+    //         form.elements[name].value = value;
+    //     });
+    currentState.forEach(({target}) => {
+        objData[target.name] = value;
+        form.elements[target.name].value = value;
+    });
 }
 
 
@@ -31,10 +47,10 @@ function updateForm() {
 //   };
 // };
 
-// function addTaskToStorage(email, message) {
+// function addTaskToStorage() {
 //   const currentState = load(STORAGE_KEY);
 //   if (currentState === undefined) {
-//     save(STORAGE_KEY, createTaskObject(email, message));
+//     save(STORAGE_KEY, objData);
 //   } else {
 //     save(STORAGE_KEY, currentState);
 //   }
