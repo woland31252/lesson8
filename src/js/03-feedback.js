@@ -6,22 +6,25 @@ const STORAGE_KEY = 'feedback-form-state';
 const objData = {};
 
 updateForm();
+
 form.addEventListener("input", LodashThrottle(handleInput, 500));
 form.addEventListener("submit", handleSubmit);
+
 function handleInput({ target }) {
     objData[target.name] = target.value;
     save(STORAGE_KEY, objData);
-    console.log(objData);
+    
 };
 
 function handleSubmit(event) {
     event.preventDefault();
-    // const {
-    //     elements: { email, message }
-    // } = event.target;
-    // if (email.value === "" || message.value === "") {
-    //     return window.alert("Please fill in the form")
-    // } 
+    console.log(objData);
+    const {
+        elements: { email, message }
+    } = event.target;
+    if (email.value === '' || message.value === '') {
+      return window.alert('Please fill in all the fields!');
+    }
     form.reset();
     localStorage.removeItem(STORAGE_KEY);
 };
@@ -30,36 +33,10 @@ function updateForm() {
     const currentState = load(STORAGE_KEY);
     console.log(currentState);
     if (currentState) {
-        Object.values(currentState).forEach(value => {
-            console.log(form.target.name = value);
-           form.target.name = value; 
+        Object.entries(currentState).forEach(([name, value]) => {
+          objData[name] = value;
+          form.elements[name].value = value;
         });
-    }
-    
-    //    const onObject = Object.entries(currentState[searilizedState]);
-    //     onObject.forEach(([name, value]) => {
-    //         objData[name] = value;
-    //         form.elements[name].value = value;
-    //     });
-    // currentState.forEach(({target}) => {
-    //     objData[target.name] = value;
-    //     form.elements[target.name].value = value;
-    // });
+        
+    };
 }
-
-
-// function createTaskObject(email, message) {
-//   return {
-//     email,
-//     message,
-//   };
-// };
-
-// function addTaskToStorage() {
-//   const currentState = load(STORAGE_KEY);
-//   if (currentState === undefined) {
-//     save(STORAGE_KEY, objData);
-//   } else {
-//     save(STORAGE_KEY, currentState);
-//   }
-// };
