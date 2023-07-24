@@ -7,36 +7,44 @@ const objData = {};
 
 updateForm();
 form.addEventListener("input", LodashThrottle(handleInput, 500));
-form.addEventListener("submit", handleSaveData);
+form.addEventListener("submit", handleSubmit);
 function handleInput({ target }) {
     objData[target.name] = target.value;
     save(STORAGE_KEY, objData);
     console.log(objData);
 };
 
-function handleSaveData(event) {
+function handleSubmit(event) {
     event.preventDefault();
-    const {
-        elements: { email, message }
-    } = event.target;
-    if (email.value === "" || message.value === "") {
-        return window.alert("Please fill in the form")
-    } 
+    // const {
+    //     elements: { email, message }
+    // } = event.target;
+    // if (email.value === "" || message.value === "") {
+    //     return window.alert("Please fill in the form")
+    // } 
     form.reset();
     localStorage.removeItem(STORAGE_KEY);
 };
 
 function updateForm() {
     const currentState = load(STORAGE_KEY);
+    console.log(currentState);
+    if (currentState) {
+        Object.values(currentState).forEach(value => {
+            console.log(form.target.name = value);
+           form.target.name = value; 
+        });
+    }
+    
     //    const onObject = Object.entries(currentState[searilizedState]);
     //     onObject.forEach(([name, value]) => {
     //         objData[name] = value;
     //         form.elements[name].value = value;
     //     });
-    currentState.forEach(({target}) => {
-        objData[target.name] = value;
-        form.elements[target.name].value = value;
-    });
+    // currentState.forEach(({target}) => {
+    //     objData[target.name] = value;
+    //     form.elements[target.name].value = value;
+    // });
 }
 
 
