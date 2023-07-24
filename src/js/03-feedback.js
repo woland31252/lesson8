@@ -23,7 +23,7 @@ function handleSubmit(event) {
         elements: { email, message }
     } = event.target;
     if (email.value === '' || message.value === '') {
-      return window.alert('Please fill in all the fields!');
+      alert('Please fill in all the fields!');
     }
     form.reset();
     localStorage.removeItem(STORAGE_KEY);
@@ -31,7 +31,6 @@ function handleSubmit(event) {
 
 function updateForm() {
     const currentState = load(STORAGE_KEY);
-    console.log(currentState);
     if (currentState) {
         Object.entries(currentState).forEach(([name, value]) => {
           objData[name] = value;
