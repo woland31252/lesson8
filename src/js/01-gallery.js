@@ -9,7 +9,7 @@ const gallery = document.querySelector('.gallery');
 // Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
 const liImg = galleryItems
   .map(
-    elem => `<li class="gallery_item"><a class="gallery__link" href="${elem.original}"><img class="gallery__image"
+    elem => `<li class="gallery__item"><a class="gallery__link" href="${elem.original}"><img class="gallery__image"
       src="${elem.preview}"
       alt="${elem.description}"/></a></li>`
   )
